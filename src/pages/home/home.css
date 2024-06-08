@@ -1,0 +1,134 @@
+.banner {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px;
+  background-color: #333;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.banner::-webkit-scrollbar {
+ }
+
+.banner_img {
+  position: relative;
+  margin-right: 20px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.banner_img img {
+  max-width: 200px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.banner:hover {
+  transform: scale(1.05);
+}
+
+.banner_time {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.list {
+  padding: 20px 100px;
+  position: relative;
+  color: white;
+}
+
+.list h1{
+  padding: 10px 0 20px 0;
+  font-size: 20px;
+  color: #f59e0b;
+}
+
+.an {
+  white-space: nowrap;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.movie {
+  background-color: #000000;
+  display: block !important;
+  padding: 0 20px;
+  width: 93% !important;
+  color: white;
+}
+
+.movie a {
+  text-decoration: none;
+  padding: 20px 0;
+  color: white;
+}
+
+.movie img {
+  border-radius: 10px;
+  background-size: cover;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.movie img:hover {
+  border-radius: 10px;
+  transform: scale(1.04);
+}
+.movie h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.movie p {
+  margin-top: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  font-size: 2rem;
+  cursor: pointer;
+  color: rgb(70, 70, 70); 
+}
+
+.next-arrow {
+  right: 10px;
+}
+
+.prev-arrow {
+  left: 10px;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-content {
+  color: #fff;
+  font-size: 3rem; /* Điều chỉnh kích thước biểu tượng */
+}
+
+.movie:hover .overlay {
+  opacity: 1;
+}

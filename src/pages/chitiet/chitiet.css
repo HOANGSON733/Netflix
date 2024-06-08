@@ -1,0 +1,221 @@
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 100px auto 0;
+  padding: 20px;
+}
+
+/* Loading */
+.load {
+  text-align: center;
+  margin-top: 25%;
+}
+
+/* Chi tiết */
+.chitiet {
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: center;
+  align-items: flex-start;
+  background-repeat: no-repeat;
+  gap: 20px;
+  position: relative;
+  background-size: cover;
+}
+
+.chitiet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.7) 30%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.7) 70%,
+      rgba(0, 0, 0, 0.8) 100%);
+  z-index: 1;
+}
+
+.chitiet__poster {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.chitiet__poster .watch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chitiet__poster .watch p{
+  padding: 5px 10px;
+  background-color: #ff0000;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.chitiet__poster .watch a{
+  text-decoration: none;
+}
+
+.chitiet__poster .watch button{
+  padding: 5px 10px;
+  background-color: #ff0000;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.chitiet_poster_content {
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+  transform: translateX(-50%);
+  color: #fff;
+  background-color: rgba(248, 0, 0, 0.75);
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.chitiet__poster img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.P1 {
+  display: grid;
+  grid-template-columns: 130px auto;
+  padding: 10px 0;
+  border-bottom: 1px solid  rgb(255, 255, 255, 0.2);
+  background-color: rgb(0, 0, 0, 0.4);
+}
+
+.P1 h5{
+  color: #f59e0b;
+}
+
+.P1 p{
+  font-size: 14px;
+  font-style: italic;
+}
+
+.chitiet__info {
+  flex: 1;
+  padding: 20px;
+  z-index: 2;
+  color: #fff;
+  /* Ensure text is readable on dark background */
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 1px;
+}
+
+.trailer {
+  margin: 20px 0;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+.iframe{
+  width: 100%;
+  height: 350px;
+}
+
+.trailer-btn {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: #420000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.trailer-btn:hover {
+  background-color: #ff0000;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+  color: #000;
+}
+
+.modal img {
+  width: 100%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chitiet {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .chitiet__poster {
+    margin-bottom: 20px;
+  }
+
+  .chitiet_poster_content {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

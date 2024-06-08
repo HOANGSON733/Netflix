@@ -1,0 +1,145 @@
+/* General styles for the navbar */
+.navbar {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #141414ea;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+/* 
+.navbar-background {
+  
+  filter: blur(5px) brightness(90%);
+  position: absolute;
+
+} */
+
+.navbar_item {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.logo {
+  height: 36px;
+}
+
+.ul1 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ul1 li {
+  margin-right: 20px;
+}
+
+.ul1 li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown .dropbtn {
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.dropdown .icon {
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #141414;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: 1px solid #ccc;
+}
+.dropdown-content li {
+  padding: 8px 6px;
+  display: flex;
+  width: 70px;
+  list-style: none;
+}
+
+.dropdown-content li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-content li a:hover {
+  background-color: #575757;
+}
+
+.dropdown:hover .dropdown-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #ccc;
+  font-size: 20px;
+}
+
+.search-input {
+  width: 250px;
+  padding: 10px 40px 10px 35px; /* Padding adjusted for the icons inside */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: white;
+  background-color: #14141400;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #e50914; /* Netflix red */
+}
+
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.clear-icon {
+  color: #ccc;
+  font-size: 20px;
+}

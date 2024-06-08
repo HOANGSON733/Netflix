@@ -1,0 +1,99 @@
+/* footer.css */
+
+.footer {
+    background-color: #141414;  /* Dark background */
+    color: #999;  /* Light gray text */
+    padding: 40px 20px;  /* Spacing around footer */
+    font-size: 13px;  /* Font size similar to Netflix */
+  }
+  
+  .footer-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-top {
+    margin-bottom: 20px;
+  }
+  
+  .footer-top-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;  /* Spacing between social icons */
+  }
+  
+  .social-icon {
+    color: #999;  /* Icon color */
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s;  /* Smooth transition */
+  }
+  
+  .social-icon:hover {
+    color: #fff;  /* White on hover */
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;  /* Allow wrapping for smaller screens */
+    gap: 20px 40px;  /* Spacing between columns and rows */
+    margin-bottom: 20px;
+  }
+  
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Spacing between links */
+  }
+  
+  .footer-column a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s;  /* Smooth transition */
+  }
+  
+  .footer-column a:hover {
+    color: #fff;  /* White on hover */
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #333;  /* Thin border on top */
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .service-code-button {
+    background: none;
+    border: 1px solid #333;
+    color: #999;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .service-code-button:hover {
+    background-color: #333;
+    color: #fff;  /* White on hover */
+  }
+  
+  .footer-note {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+  
+    .footer-column {
+      align-items: center;
+    }
+  }
+  
