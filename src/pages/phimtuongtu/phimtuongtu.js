@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';  // assuming you're using react-slick for the slider
-import { fetchPopularMovies, getPhimTuongTu, getchitiet } from '../../api/Api';
+import { fetchPopularMovies } from '../../api/Api';
 
 const DetailsMovie = () => {
     const { slug } = useParams();
@@ -13,7 +13,7 @@ const DetailsMovie = () => {
                 const { movies } = await fetchPopularMovies();
                 setPhimCapNhat(movies);
 
-               
+
             } catch (error) {
                 console.error('Error fetching movie details:', error);
             }
@@ -67,24 +67,31 @@ const DetailsMovie = () => {
             {(movies) ? (
                 <>
                     <div className="show_series">
-                        <div className='category'>đề xuất phim mới</div>
+                        <div className='category'><i class="fa-solid fa-clapperboard"></i> đề xuất phim mới</div>
                         <Slider {...settings}>
-                            {movies && movies.map(movie => (
-                                <div key={movie.id} className="movie">
-                                    <Link to={`/movie/detailsmovie/${movie.slug}`}>
-                                        <img src={`${movie.poster_url}`} alt={movie.title} />
-                                    </Link>
-                                    <div className='year'>
-                                        <p>{movie.year}</p>
+                            {movies.map((movie) => (
+                                <div key={movie.id} className="movie1">
+                                    <div className='image'>
+                                        <Link to={`/movie/chitiet/${movie.slug}`}>
+                                            <img
+                                                src={`${movie.poster_url}`}
+                                                alt={movie.title}
+                                            />
+                                        </Link>
                                     </div>
-                                    <div className='title'>
+                                    <Link to={`/movie/chitiet/${movie.slug}`}>
+                                        <div class="overlay1">
+                                            <div class="overlay-content1">
+                                                <h3>{movie.name}</h3>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    <div className="title">
                                         <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                                     </div>
                                 </div>
                             ))}
-                            <div className='view_more'>
-                                <Link to={"/movie/phim_moi_cap_nhat"}><button>View More</button></Link>
-                            </div>
+
                         </Slider>
                     </div>
                 </>

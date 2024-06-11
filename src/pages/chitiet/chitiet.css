@@ -1,8 +1,6 @@
 /* Container */
 .container {
-  max-width: 1000px;
-  margin: 100px auto 0;
-  padding: 20px;
+  padding: 100px 10%;
 }
 
 /* Loading */
@@ -43,8 +41,8 @@
 .chitiet__poster {
   position: relative;
   z-index: 2;
-  margin: 0;
   padding: 0;
+  margin: auto;
 }
 
 .chitiet__poster .watch {
@@ -53,18 +51,18 @@
   gap: 10px;
 }
 
-.chitiet__poster .watch p{
+.chitiet__poster .watch p {
   padding: 5px 10px;
   background-color: #ff0000;
   border-radius: 5px;
   color: #fff;
 }
 
-.chitiet__poster .watch a{
+.chitiet__poster .watch a {
   text-decoration: none;
 }
 
-.chitiet__poster .watch button{
+.chitiet__poster .watch button {
   padding: 5px 10px;
   background-color: #ff0000;
   border-radius: 5px;
@@ -84,25 +82,26 @@
 }
 
 .chitiet__poster img {
-  width: 100%;
-  max-width: 300px;
+  width: 90%;
   height: auto;
   border-radius: 5px;
+  padding: 10px;
+  border-radius: 25px;
 }
 
 .P1 {
   display: grid;
   grid-template-columns: 130px auto;
-  padding: 10px 0;
-  border-bottom: 1px solid  rgb(255, 255, 255, 0.2);
+  padding: 10px;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.2);
   background-color: rgb(0, 0, 0, 0.4);
 }
 
-.P1 h5{
+.P1 h5 {
   color: #f59e0b;
 }
 
-.P1 p{
+.P1 p {
   font-size: 14px;
   font-style: italic;
 }
@@ -112,7 +111,7 @@
   padding: 20px;
   z-index: 2;
   color: #fff;
-  /* Ensure text is readable on dark background */
+  
 }
 
 .buttons {
@@ -141,7 +140,7 @@
   align-items: center; */
 }
 
-.iframe{
+.iframe {
   width: 100%;
   height: 350px;
 }

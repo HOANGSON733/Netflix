@@ -57,6 +57,7 @@ const Chitiet = () => {
     return (
       <div className="load">
         <Loading />
+        {window.scrollTo({ top: 0 })}
       </div>
     );
   }

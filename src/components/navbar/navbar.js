@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchPopulartheloai } from "../../api/Api"; // Adjust the import based on your project structure
-import { FaSearch, FaChevronDown } from "react-icons/fa";
+import { fetchPopulartheloai } from "../../api/Api";
+import { FaSearch, FaChevronDown, FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import "./navbar.css";
 
@@ -9,12 +9,12 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [theloai, setTheloai] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      // Implement the search redirect logic
-      window.location.href = `/movie/search/keyword/${keyword}`;
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    window.location.href = `/movie/search/keyword/${keyword}`;
+  };
 
   const handleDropdownClick = () => {
     setShowDropdown(!showDropdown);
@@ -22,6 +22,11 @@ const Navbar = () => {
 
   const handleClear = () => {
     setKeyword('');
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    setShowDropdown(false); // Ensure dropdown is closed when menu is toggled
   };
 
   useEffect(() => {
@@ -39,7 +44,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navbar-background"></div>
-      <div className="navbar_item">
+      <div className="logo-container">
         <Link to="/">
           <img
             className="logo"
@@ -48,23 +53,16 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="navbar_item">
+      <button className="menu-toggle" onClick={toggleMenu}>
+        <FaBars className="menu-icon" />
+      </button>
+      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <ul className="ul1">
-          <li>
-            <Link to="/">Trang chủ</Link>
-          </li>
-          <li>
-            <Link to="/movie/phim-bo">phim bộ</Link>
-          </li>
-          <li>
-            <Link to="/movie/phim-le">phim lẻ</Link>
-          </li>
-          <li>
-            <Link to="/danh-sach/tv-shows">Tv show</Link>
-          </li>
-          <li>
-            <Link to="/movie/hoat-hinh">hoạt hình</Link>
-          </li>
+          <li><Link to="/">Trang chủ</Link></li>
+          <li><Link to="/movie/phim-bo">Phim bộ</Link></li>
+          <li><Link to="/movie/phim-le">Phim lẻ</Link></li>
+          <li><Link to="/danh-sach/tv-shows">TV Show</Link></li>
+          <li><Link to="/movie/hoat-hinh">Hoạt hình</Link></li>
           <li className="dropdown">
             <span className="dropbtn" onClick={handleDropdownClick}>
               Thể loại
@@ -85,24 +83,24 @@ const Navbar = () => {
             )}
           </li>
         </ul>
-      </div>
-      <div className="navbar_item">
-        <form onSubmit={handleSubmit} className="search-form">
-          <div className="search">
-            <FaSearch className="search-icon" />
-            <input
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder="Tìm kiếm phim"
-              className="search-input"
-            />
-            {keyword && (
-              <button type="button" onClick={handleClear} className="clear-button">
-                <IoMdClose className="clear-icon" />
-              </button>
-            )}
-          </div>
-        </form>
+        {isMenuOpen && (
+          <form onSubmit={handleSubmit} className="search-form">
+            <div className="search">
+              <FaSearch className="search-icon" />
+              <input
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                placeholder="Tìm kiếm phim"
+                className="search-input"
+              />
+              {keyword && (
+                <button type="button" onClick={handleClear} className="clear-button">
+                  <IoMdClose className="clear-icon" />
+                </button>
+              )}
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );
