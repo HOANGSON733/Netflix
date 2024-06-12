@@ -1,96 +1,49 @@
-import React, { useEffect, useState } from "react";
-import "./phimle.css";
-import { Link } from "react-router-dom";
-import { getphimle, fetchPopulartheloai } from "../../api/Api";
-import Loading from "../../components/loading/loading";
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { getphimle } from '../../api/Api';
+import './phimle.css'
 
-const Phimle = () => {
-  const [phimle, setPhimLe] = useState([]);
-  const [theloai, setTheLoai] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(10);
-  const [loading, setLoading] = useState(true);
+const SeriesMovie = () => {
+  const [phimle, setPhimLe] = useState(null);
+  const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
 
-  const fetchData = async () => {
+  const handleClick = async (pageNumber) => {
     try {
-      const { phimle } = await getphimle();
-      const { theloai } = await fetchPopulartheloai();
-      setPhimLe(phimle);
-      setTheLoai(theloai);
-      setLoading(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const phimleLS = localStorage.getItem('phimle');
+      const paginationLS = localStorage.getItem('pagination');
+      if (phimleLS && paginationLS) {
+        setPhimLe(JSON.parse(phimleLS));
+        setPagination(JSON.parse(paginationLS));
+      }
+      const { phimLe, pagination } = await getphimle(pageNumber);
+      setPhimLe(phimLe);
+      setPagination(pagination);
+
+      localStorage.setItem('phimle', JSON.stringify(phimLe));
+      localStorage.setItem('pagination', JSON.stringify(pagination));
+
+      console.log('PhimLe:', phimLe);
+      console.log('Pagination:', pagination);
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
+      console.error('Error fetching movies:', error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    handleClick(1);
   }, []);
 
-  // Filter movies based on search term and selected genre
-  const filteredMovies = phimle.filter((movie) => {
-    return (
-      movie.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedGenre === "" || movie.genre.includes(selectedGenre))
-    );
-  });
-
-  // Get current movies based on pagination
-  const indexOfLastMovie = currentPage * moviesPerPage;
-  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie);
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
-      {loading ? (
-        <div className="loading1">
-          <Loading />
-        </div>
-      ) : (
-        <div className="film_component">
-          <div className="category2">Phim Lẻ</div>
-          <div className="film_componet_loc">
-            <input
-              type="text"
-              placeholder="Search movies..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-bar"
-            />
-            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="filter-select">
-              <option value="">Phim</option>
-              {theloai.map((genre) => (
-                <option key={genre.id} value={genre.name}>{genre.name}</option>
-              ))}
-            </select>
-            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="filter-select">
-              <option value="">All Genres</option>
-              {theloai.map((genre) => (
-                <option key={genre.id} value={genre.name}>{genre.name}</option>
-              ))}
-            </select>
-            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="filter-select">
-              <option value="">Year</option>
-              {theloai.map((genre) => (
-                <option key={genre.id} value={genre.name}>{genre.name}</option>
-              ))}
-            </select>
-            <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="filter-select">
-              <option value="">Quốc gia</option>
-              {theloai.map((genre) => (
-                <option key={genre.id} value={genre.name}>{genre.name}</option>
-              ))}
-            </select>
-            <button className="button">Lọc Phim</button>
-          </div>
+      {phimle ? (
+        <div className='film_component'>
+          <div className='category' style={{ color: "#f89e00" }}>Phim Lẻ</div>
           <div className="list2">
-            {currentMovies.map((movie) => (
+            {phimle.map((movie) => (
               <div key={movie.id} className="movie1">
                 <div>
                   <Link to={`/movie/chitiet/${movie.slug}`}>
@@ -113,38 +66,27 @@ const Phimle = () => {
               </div>
             ))}
           </div>
-          <Pagination
-            moviesPerPage={moviesPerPage}
-            totalMovies={filteredMovies.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
+          <div className='pagination'>
+            <div className='page'>
+              <button hidden={pagination.currentPage <= 1} onClick={() => handleClick(pagination.currentPage - 1)}><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
+              <button hidden={pagination.currentPage <= 2} onClick={() => handleClick(pagination.currentPage - 2)}>{pagination.currentPage - 2}</button>
+              <button hidden={pagination.currentPage <= 1} onClick={() => handleClick(pagination.currentPage - 1)}>{pagination.currentPage - 1}</button>
+              <button style={{ backgroundColor: '#e50914', color: "#fff" }}>{pagination.currentPage}</button>
+              <button hidden={pagination.currentPage >= pagination.totalPages} onClick={() => handleClick(pagination.currentPage + 1)}>{pagination.currentPage + 1}</button>
+              <button hidden={pagination.currentPage >= pagination.totalPages} onClick={() => handleClick(pagination.currentPage + 2)}>{pagination.currentPage + 2}</button>
+              <button onClick={() => handleClick(pagination.currentPage + 1)}><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div className='result'>
+              <p>Trang {pagination.currentPage}/{pagination.totalPages} | Tổng {pagination.totalItems} Kết quả</p>
+            </div>
+          </div>
         </div>
+      ) : (
+        <h1>Loading</h1>
       )}
+
     </div>
   );
 };
 
-const Pagination = ({ moviesPerPage, totalMovies, paginate, currentPage }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalMovies / moviesPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li key={number} className={`page-item ${currentPage === number ? "active" : ""}`}>
-            <a onClick={() => paginate(number)} href="#!" className="page-link">
-              {number}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
-export default Phimle;
+export default SeriesMovie;

@@ -36,58 +36,55 @@ const Search = () => {
 
   const displayMovies = timkiem
     ? timkiem
-        .slice(pageNumber * moviesPerPage, (pageNumber + 2) * moviesPerPage)
-        .map((movie) => (
-          <div key={movie.id} className="movie1">
-            <div>
-              <Link to={`/movie/chitiet/${movie.slug}`}>
-                <img
-                  src={`https://img.phimapi.com/${movie.poster_url}`}
-                  alt={movie.title}
-                />
-              </Link>
-            </div>
+      .slice(pageNumber * moviesPerPage, (pageNumber + 2) * moviesPerPage)
+      .map((movie) => (
+        <div key={movie.id} className="movie1">
+          <div>
             <Link to={`/movie/chitiet/${movie.slug}`}>
-              <div class="overlay1">
-                <div class="overlay-content1">
-                  <h3>{movie.name}</h3>
-                </div>
-              </div>
+              <img
+                src={`https://img.phimapi.com/${movie.poster_url}`}
+                alt={movie.title}
+              />
             </Link>
-            {/* <div className="year">
-              <p>{movie.year}</p>
-            </div> */}
-            <div className="title">
-              <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
-            </div>
           </div>
-        ))
+          <Link to={`/movie/chitiet/${movie.slug}`}>
+            <div class="overlay1">
+              <div class="overlay-content1">
+                <h3>{movie.name}</h3>
+              </div>
+            </div>
+          </Link>
+          <div className="title">
+            <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
+          </div>
+        </div>
+      ))
     : null;
 
-    return (
-      <div className="search-results">
-        {loading ? (
-            <Loading/>
-        ) : (
-          <>
-            {titlePage && <div className="category">{titlePage}</div>}
-            <div className="list1">{displayMovies}</div>
-            <div calssname="tt1">
-              {timkiem && (
-                <ReactPaginate
-                  previousLabel={"Previous"}
-                  nextLabel={"Next"}
-                  pageCount={pageCount}
-                  onPageChange={handlePageClick}
-                  containerClassName={"pagination"}
-                  activeClassName={"active"}
-                />
-              )}
-            </div>
-          </>
-        )}
-      </div>
-    );
+  return (
+    <div className="search-results">
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {titlePage && <div className="category">{titlePage}</div>}
+          <div className="list1">{displayMovies}</div>
+          <div calssname="tt1">
+            {timkiem && (
+              <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+              />
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Search;

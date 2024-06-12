@@ -42,9 +42,9 @@ const PopularMoviesPage = () => {
         setPopularMovies(movies);
         console.log("Check >>>", movies);
 
-        const { phimle } = await getphimle();
-        setphimle(phimle);
-        console.log("Check >>>11", phimle);
+        const { phimLe } = await getphimle();
+        setphimle(phimLe);
+        console.log("Check >>>11", phimLe);
 
         const { hoathinh } = await getphimhoathinh();
         sethoathinh(hoathinh);

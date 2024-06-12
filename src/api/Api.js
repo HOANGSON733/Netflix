@@ -59,24 +59,36 @@ export const getchitiet = async (slug) => {
   }
 };
 
-export const getphimbo = async (id) => {
+export const getphimbo = async (pageNumber) => {
   try {
-    const response = await movieApi.get(`/v1/api/danh-sach/phim-bo`);
+    const response = await movieApi.get('/v1/api/danh-sach/phim-bo', {
+      params: {
+        page: pageNumber
+      }
+    });
     return {
-      phimbo: response.data.data.items
-    };
+      phimbo: response.data.data.items,
+      titlePL: response.data.data,
+      pagination: response.data.data.params.pagination
+    }
   } catch (error) {
     throw error;
   }
 };
 
 
-export const getphimle = async (id) => {
+export const getphimle = async (pageNumber) => {
   try {
-    const response = await movieApi.get(`/v1/api/danh-sach/phim-le`);
+    const response = await movieApi.get('/v1/api/danh-sach/phim-le', {
+      params: {
+        page: pageNumber
+      }
+    });
     return {
-      phimle: response.data.data.items
-    };
+      phimLe: response.data.data.items,
+      titlePL: response.data.data,
+      pagination: response.data.data.params.pagination
+    }
   } catch (error) {
     throw error;
   }
