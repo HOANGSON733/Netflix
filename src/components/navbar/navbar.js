@@ -1,106 +1,98 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchPopulartheloai } from "../../api/Api";
-import { FaSearch, FaChevronDown, FaBars } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
-import "./navbar.css";
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './navbar.css';
+import { fetchPopulartheloai } from '../../api/Api';
+import { FaChevronDown } from 'react-icons/fa';
 
 const Navbar = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [keyword, setKeyword] = useState("");
-  const [theloai, setTheloai] = useState([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    window.location.href = `/movie/search/keyword/${keyword}`;
-  };
-
-  const handleDropdownClick = () => {
-    setShowDropdown(!showDropdown);
-  };
-
-  const handleClear = () => {
-    setKeyword('');
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    setShowDropdown(false); // Ensure dropdown is closed when menu is toggled
-  };
+  const [menu, setMenu] = useState('trang_chu');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [genres, setGenres] = useState([]);
+  const dropdownRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { theloai } = await fetchPopulartheloai();
-        setTheloai(theloai);
+        setGenres(theloai || []);
       } catch (error) {
-        console.error("Error fetching popular theloai:", error);
+        console.error('Error fetching Genres:', error);
       }
     };
+
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleMenuClick = (category) => {
+    setMenu(category);
+    setMenuOpen(false);
+    window.scrollTo({ top: 0 });
+  };
+
+  const logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png";
+
   return (
-    <div className="navbar">
-      <div className="navbar-background"></div>
-      <div className="logo-container">
-        <Link to="/">
-          <img
-            className="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-            alt="Netflix Logo"
-          />
-        </Link>
-      </div>
-      <button className="menu-toggle" onClick={toggleMenu}>
-        <FaBars className="menu-icon" />
-      </button>
-      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-        <ul className="ul1">
-          <li><Link to="/">Trang chủ</Link></li>
-          <li><Link to="/movie/phim-bo">Phim bộ</Link></li>
-          <li><Link to="/movie/phim-le">Phim lẻ</Link></li>
-          <li><Link to="/danh-sach/tv-shows">TV Show</Link></li>
-          <li><Link to="/movie/hoat-hinh">Hoạt hình</Link></li>
-          <li className="dropdown">
-            <span className="dropbtn" onClick={handleDropdownClick}>
-              Thể loại
-              <FaChevronDown className="icon" />
-            </span>
-            {showDropdown && (
-              <ul className="dropdown-content">
-                {Array.isArray(theloai) && theloai.length > 0 ? (
-                  theloai.map((item) => (
-                    <li key={item.id}>
-                      <Link to="#">{item.name}</Link>
-                    </li>
-                  ))
-                ) : (
-                  <p>Không có thể loại nào</p>
-                )}
-              </ul>
-            )}
-          </li>
-        </ul>
-        {isMenuOpen && (
-          <form onSubmit={handleSubmit} className="search-form">
-            <div className="search">
-              <FaSearch className="search-icon" />
-              <input
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                placeholder="Tìm kiếm phim"
-                className="search-input"
-              />
-              {keyword && (
-                <button type="button" onClick={handleClear} className="clear-button">
-                  <IoMdClose className="clear-icon" />
-                </button>
+    <div className='navbar_container'>
+      <div className={`navbar ${menuOpen ? 'active' : ''}`}>
+        <div className='logo'>
+          <Link onClick={() => handleMenuClick('trang_chu')} to='/'>
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
+        <button className='menu-toggle' onClick={toggleMenu}>
+          {menuOpen ? <i className="fa-solid fa-xmark"></i> : <i className="fa-solid fa-bars"></i>}
+        </button>
+        <div className={`bar ${menuOpen ? 'active' : ''}`}>
+          <ul>
+            <li><Link to="/">Trang chủ</Link></li>
+            <li><Link to="/movie/phim-le">Phim lẻ</Link></li>
+            <li><Link to="/movie/phim-bo">Phim bộ</Link></li>
+            <li><Link to="/danh-sach/tv-shows">TV Show</Link></li>
+            <li><Link to="/movie/hoat-hinh">Hoạt hình</Link></li>
+            <li className="dropdown" ref={dropdownRef}>
+              <li className="dropbtn" onClick={toggleDropdown}>
+                <Link>Thể loại</Link>
+                <FaChevronDown className="icon" />
+              </li>
+              {dropdownOpen && (
+                <ul className="dropdown-content show">
+                  {genres.length > 0 ? (
+                    genres.map((item) => (
+                      <li key={item.id}>
+                        <Link to={`/the-loai/${item.slug}`}>{item.name}</Link>
+                      </li>
+                    ))
+                  ) : (
+                    <p>Không có thể loại nào</p>
+                  )}
+                </ul>
               )}
-            </div>
-          </form>
-        )}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

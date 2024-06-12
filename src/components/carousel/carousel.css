@@ -91,7 +91,7 @@
   margin: 50px auto auto auto;
   padding: 15px;  /* Add padding for better spacing */
   position: relative;
-  z-index: 10;
+  z-index: 6;
   background-color: rgba(0, 0, 0, 0.8);  
   border-radius: 5px;  /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */

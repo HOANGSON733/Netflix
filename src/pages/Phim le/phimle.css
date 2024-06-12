@@ -1,5 +1,5 @@
 .film_component {
-  margin-top: 100px;
+  padding-top: 50px !important;
   padding: 0 10%;
   /* background-color: #363636; */
 
@@ -89,7 +89,7 @@
 }
 
 .pagination {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   padding: 20px 0;
 }

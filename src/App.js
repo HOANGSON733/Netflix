@@ -12,6 +12,7 @@ import TvShow from "./pages/Tv Show/Tvshow";
 import PhimHoatHinh from "./pages/Phim Hoat Hinh/phimhoathinh";
 import '@fortawesome/fontawesome-free/css/all.css';
 import Footer from "./components/footer/footer";
+import PhimTheoTheLoai from './pages/PhimTheoTheLoai/phim_theo_the_loai'
 
 function App() {
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/movie/hoat-hinh" element={<PhimHoatHinh/>} />
         <Route path="/danh-sach/tv-shows" element={<TvShow/>} />
         <Route path="/movie/search/keyword/:keyword" element={<TimKiem />} />
+        <Route path="/the-loai/:slug" element={<PhimTheoTheLoai/>} />
+
       </Routes>
       <Footer />
     </div>

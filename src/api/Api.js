@@ -122,3 +122,33 @@ export const getPhimTuongTu = async () => {
   }
 };
 
+
+export const getGenresMovie = async () => {
+  try {
+    // Chuyển đổi keyword thành chuỗi
+    const response = await movieApi.get('/v1/api/tim-kiem', {
+      params: {
+        keyword: "a",
+        limit: 1000,
+      }
+    });
+    return {
+      genresMovie: response.data.data.items,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getGenres = async () => {
+  try {
+    // Chuyển đổi keyword thành chuỗi
+    const response = await movieApi.get('/the-loai', {
+    });
+    return {
+      genres: response.data
+    };
+  } catch (error) {
+    throw error;
+  }
+};

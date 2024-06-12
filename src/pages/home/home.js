@@ -95,7 +95,7 @@ const PopularMoviesPage = () => {
   };
 
   return (
-    <>{popularMovies.length>0 && phimle.length>0 && hoathinh.length>0 && TvShow.length>0 ? (
+    <>{popularMovies.length > 0 && phimle.length > 0 && hoathinh.length > 0 && TvShow.length > 0 ? (
       <div>
         <div>
           <Carousel />
@@ -104,19 +104,24 @@ const PopularMoviesPage = () => {
           <h1><i class="fa-solid fa-clapperboard"></i> Phim Mới Cập Nhật</h1>
           <Slider {...settings}>
             {popularMovies.map((movie) => (
-              <div key={movie.id} className="movie">
-                <div className="movie_img">
-
-                  <Link to={`/movie/chitiet/${movie.slug}`}>
-                    <img src={`${movie.poster_url}`} alt={movie.name} />
-
-                  </Link>
-                  {movie.tiem}
-                </div>
+              <div key={movie.id} className="movie1">
                 <div>
-                  <h2 className="an">
-                    <Link to={`/movie/chitiet/${movie.slug}`}>{movie.name}</Link>
-                  </h2>
+                  <Link to={`/movie/chitiet/${movie.slug}`}>
+                    <img
+                      src={`${movie.poster_url}`}
+                      alt={movie.title}
+                    />
+                  </Link>
+                </div>
+                <Link to={`/movie/chitiet/${movie.slug}`}>
+                  <div class="overlay1">
+                    <div class="overlay-content1">
+                      <h3>{movie.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+                <div className="title">
+                  <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                 </div>
               </div>
             ))}
@@ -125,19 +130,24 @@ const PopularMoviesPage = () => {
           <h1><i class="fa-solid fa-clapperboard"></i> Phim Lẻ</h1>
           <Slider {...settings}>
             {phimle.map((movie) => (
-              <div key={movie.id} className="movie">
-                <div className="movie_img">
+              <div key={movie.id} className="movie1">
+                <div>
                   <Link to={`/movie/chitiet/${movie.slug}`}>
                     <img
                       src={`https://img.phimapi.com/${movie.poster_url}`}
-                      alt={movie.name}
+                      alt={movie.title}
                     />
                   </Link>
                 </div>
-                <div>
-                  <h2 className="an">
-                    <Link to={`/movie/chitiet/${movie.slug}`}>{movie.name}</Link>
-                  </h2>
+                <Link to={`/movie/chitiet/${movie.slug}`}>
+                  <div class="overlay1">
+                    <div class="overlay-content1">
+                      <h3>{movie.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+                <div className="title">
+                  <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                 </div>
               </div>
             ))}
@@ -146,19 +156,24 @@ const PopularMoviesPage = () => {
           <h1><i class="fa-solid fa-clapperboard"></i> Phim Hoạt Hình</h1>
           <Slider {...settings}>
             {hoathinh.map((movie) => (
-              <div key={movie.id} className="movie">
-                <div className="movie_img">
+              <div key={movie.id} className="movie1">
+                <div>
                   <Link to={`/movie/chitiet/${movie.slug}`}>
                     <img
                       src={`https://img.phimapi.com/${movie.poster_url}`}
-                      alt={movie.name}
+                      alt={movie.title}
                     />
                   </Link>
                 </div>
-                <div>
-                  <h2 className="an">
-                    <Link to={`/movie/chitiet/${movie.slug}`}>{movie.name}</Link>
-                  </h2>
+                <Link to={`/movie/chitiet/${movie.slug}`}>
+                  <div class="overlay1">
+                    <div class="overlay-content1">
+                      <h3>{movie.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+                <div className="title">
+                  <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                 </div>
               </div>
             ))}
@@ -167,19 +182,24 @@ const PopularMoviesPage = () => {
           <h1><i class="fa-solid fa-clapperboard"></i> TvShow</h1>
           <Slider {...settings}>
             {TvShow.map((movie) => (
-              <div key={movie.id} className="movie">
-                <div className="movie_img">
+              <div key={movie.id} className="movie1">
+                <div>
                   <Link to={`/movie/chitiet/${movie.slug}`}>
                     <img
                       src={`https://img.phimapi.com/${movie.poster_url}`}
-                      alt={movie.name}
+                      alt={movie.title}
                     />
                   </Link>
                 </div>
-                <div>
-                  <h2 className="an">
-                    <Link to={`/movie/chitiet/${movie.slug}`}>{movie.name}</Link>
-                  </h2>
+                <Link to={`/movie/chitiet/${movie.slug}`}>
+                  <div class="overlay1">
+                    <div class="overlay-content1">
+                      <h3>{movie.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+                <div className="title">
+                  <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                 </div>
               </div>
             ))}

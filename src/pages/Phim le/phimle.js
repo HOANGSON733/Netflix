@@ -107,9 +107,6 @@ const Phimle = () => {
                     </div>
                   </div>
                 </Link>
-                {/* <div className="year">
-              <p>{movie.year}</p>
-            </div> */}
                 <div className="title">
                   <Link to={`/movie/detailsmovie/${movie.slug}`}>{movie.name}</Link>
                 </div>
